@@ -11,7 +11,7 @@ class BooksApp extends React.Component {
     books : []
   }
 
-  getbooks = () => {
+   getbooks = () => {
     BooksAPI.getAll().then((books) => {
       this.setState({ books : books})
     })
@@ -22,9 +22,11 @@ class BooksApp extends React.Component {
   }
 
   alterShelf = (book, shelf) => {
-    BooksAPI.update(book, shelf)
-    this.getbooks()
+      BooksAPI.update(book, shelf).then(response => {
+      this.getbooks();
+    });
   }
+
 
   render() {
     return (
